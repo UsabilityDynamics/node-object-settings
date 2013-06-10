@@ -1,0 +1,33 @@
+{
+  "name": "object-settings",
+  "description": "Object settings mixin with EventEmitter and change queue.",
+  "main": "./lib/settings",
+  "author": {
+    "name": "Andy Potanin",
+    "url": "http://usabilitydynamics.com"
+  },
+  "keywords": [
+    "object",
+    "emitter"
+  ],
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/usabilitydynamics/object-settings.git"
+  },
+  "bugs": {
+    "url": "https://github.com/usabilitydynamics/object-settings/issues"
+  },
+  "dependencies": {
+    "debug": "*"
+  },
+  "devDependencies": {
+    "Faker": "*",
+    "mocha": "*",
+    "should": "*"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "readmeFilename": "Readme.md"
+}
