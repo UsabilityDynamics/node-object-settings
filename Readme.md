@@ -15,34 +15,61 @@ Add Settings methods to a basic Object.
     };
 
     // Mixin Object Setting methods into MyObject
-    ObjectSettings.mixin( MyObject );
+    ObjectSettings.use( MyObject );
+
+    // Bind to Object and also load into "settings" property
+    MyObject.settings = ObjectSettings.use( MyObject );
 
 ## Advanced Usage
 
-    // Declare new method
-    function MyClass() {}
+    // Create target object
+    var MyObject = {};
 
     // Set properties and apply Object Settings to a property
-    Object.defineProperties( MyClass, {
+    Object.defineProperties( MyObject, {
       "my_data": {
         "value": {}
       },
-      "options": {
-        "value": ObjectSettings()
+      "settings": {
+        "value": new ObjectSettings
       }
     });
 
     // Interact with settings via the custom property
-    MyObject.options.set( 'some key', 'some value' );
+    MyObject.settings.set( 'some key', 'some value' );
+
+## Setting Defaults
+
+    // Get module
+    var ObjectSettings = require( 'object-settings' );
+
+    // Create target object
+    var MyObject = {
+      my_data: {},
+      my_method: function() {}
+    };
+
+    // Bind to Object with default settings
+    MyObject.settings = ObjectSettings.use( MyObject, {
+      "name": "Sparky",
+      "color": "red"
+    });
 
 ## Prototypal Usage
-
 
     // Extend the prototype configurable
     ObjectSettings.mixin( MyObject.prototype );
 
+## Constructor Methods
+Constructor methods are only available on the non-initialized Object Settings module.
+
+    .debug()
+    .use()
+    .mixin()
+    .extend()
 
 ## Object Settings' Methods
+The below methods are available once an Object Settigns instance is created.
 
     .get( name )
     .set( name, val )
@@ -68,7 +95,6 @@ If your object is EventEmitter-capable the Object Settings will emit events when
     // Set and disable the name, triggering the above events
     MyClass.set( "name", "Sparky" );
     MyClass.disable( "name" );
-
 
 ## License
 

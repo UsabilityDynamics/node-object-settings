@@ -1,0 +1,352 @@
+{
+    "project": {
+        "name": "Object Settings",
+        "description": "Object settings mixin with EventEmitter and change queue.",
+        "version": "0.0.1",
+        "url": "https://github.com/usabilitydynamics/object-settings/",
+        "logo": false
+    },
+    "files": {
+        "examples/advanced.js": {
+            "name": "examples/advanced.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "examples/basic.js": {
+            "name": "examples/basic.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "examples/events.js": {
+            "name": "examples/events.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/settings.js": {
+            "name": "lib/settings.js",
+            "modules": {},
+            "classes": {
+                "Settings": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "test/basic.js": {
+            "name": "test/basic.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "Settings": {
+            "name": "Settings",
+            "shortname": "Settings",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "lib/settings.js",
+            "line": 1,
+            "description": "Object Settings Module\n\nCreate custom objects and methods by aggregating and abstracting esources.",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "Configuration options for Settings Options instance.",
+                    "type": "Object"
+                }
+            ],
+            "version": "0.0.1",
+            "constractor": ""
+        }
+    },
+    "classitems": [
+        {
+            "file": "examples/advanced.js",
+            "line": 1,
+            "description": "-\n\n-",
+            "author": "potanin",
+            "date": "6/9/13",
+            "class": "Settings"
+        },
+        {
+            "file": "examples/basic.js",
+            "line": 1,
+            "description": "-\n\n-",
+            "author": "potanin",
+            "date": "6/9/13",
+            "class": "Settings"
+        },
+        {
+            "file": "examples/events.js",
+            "line": 1,
+            "description": "-\n\n-",
+            "author": "potanin",
+            "date": "6/9/13",
+            "class": "Settings"
+        },
+        {
+            "file": "lib/settings.js",
+            "line": 17,
+            "description": "Create Data Store, or use existing",
+            "class": "Settings"
+        },
+        {
+            "file": "lib/settings.js",
+            "line": 35,
+            "description": "Prototypal Properties",
+            "class": "Settings"
+        },
+        {
+            "file": "lib/settings.js",
+            "line": 41,
+            "description": "Set a key if a key and value are passed. If object is passed, extend it into settings object",
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "chainable": 1,
+            "class": "Settings"
+        },
+        {
+            "file": "lib/settings.js",
+            "line": 76,
+            "description": "Get the value for a particular key",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "Settings"
+        },
+        {
+            "file": "lib/settings.js",
+            "line": 85,
+            "description": "Get the value for a particular key",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "Settings"
+        },
+        {
+            "file": "lib/settings.js",
+            "line": 94,
+            "description": "Get the value for a particular key",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "Settings"
+        },
+        {
+            "file": "lib/settings.js",
+            "line": 103,
+            "description": "Get the value for a particular key",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "Settings"
+        },
+        {
+            "file": "lib/settings.js",
+            "line": 112,
+            "description": "Get the value for a particular key",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "Settings"
+        },
+        {
+            "file": "lib/settings.js",
+            "line": 122,
+            "description": "Constructor Properties",
+            "class": "Settings"
+        },
+        {
+            "file": "lib/settings.js",
+            "line": 128,
+            "description": "Debugger",
+            "class": "Settings"
+        },
+        {
+            "file": "lib/settings.js",
+            "line": 137,
+            "description": "Extend Target with Source",
+            "class": "Settings"
+        },
+        {
+            "file": "lib/settings.js",
+            "line": 159,
+            "description": "Mixes Settings Options into current context",
+            "class": "Settings"
+        },
+        {
+            "file": "lib/settings.js",
+            "line": 169,
+            "description": "Mixes Settings Options into a target object",
+            "params": [
+                {
+                    "name": "target",
+                    "description": "Target Object to extend the Obect Settings' methods into.",
+                    "type": "Object|Function"
+                }
+            ],
+            "class": "Settings"
+        },
+        {
+            "file": "test/basic.js",
+            "line": 1,
+            "description": "Basic Object Settings Tests\n\n## Standalone\nmocha basic --reporter list --ui exports --watch",
+            "type": "{Object}",
+            "class": ""
+        },
+        {
+            "file": "test/basic.js",
+            "line": 11,
+            "description": "Prepare Environment",
+            "class": ""
+        },
+        {
+            "file": "test/basic.js",
+            "line": 115,
+            "description": "Destroy Environment",
+            "class": ""
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: date",
+            "line": " examples/advanced.js:1"
+        },
+        {
+            "message": "unknown tag: date",
+            "line": " examples/basic.js:1"
+        },
+        {
+            "message": "unknown tag: date",
+            "line": " examples/events.js:1"
+        },
+        {
+            "message": "replacing incorrect tag: params with param",
+            "line": " lib/settings.js:1"
+        },
+        {
+            "message": "unknown tag: version",
+            "line": " lib/settings.js:1"
+        },
+        {
+            "message": "unknown tag: constractor",
+            "line": " lib/settings.js:1"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " lib/settings.js:41"
+        },
+        {
+            "message": "replacing incorrect tag: params with param",
+            "line": " lib/settings.js:169"
+        },
+        {
+            "message": "Missing item type\n-\n\n-",
+            "line": " examples/advanced.js:1"
+        },
+        {
+            "message": "Missing item type\n-\n\n-",
+            "line": " examples/basic.js:1"
+        },
+        {
+            "message": "Missing item type\n-\n\n-",
+            "line": " examples/events.js:1"
+        },
+        {
+            "message": "Missing item type\nCreate Data Store, or use existing",
+            "line": " lib/settings.js:17"
+        },
+        {
+            "message": "Missing item type\nPrototypal Properties",
+            "line": " lib/settings.js:35"
+        },
+        {
+            "message": "Missing item type\nSet a key if a key and value are passed. If object is passed, extend it into settings object",
+            "line": " lib/settings.js:41"
+        },
+        {
+            "message": "Missing item type\nGet the value for a particular key",
+            "line": " lib/settings.js:76"
+        },
+        {
+            "message": "Missing item type\nGet the value for a particular key",
+            "line": " lib/settings.js:85"
+        },
+        {
+            "message": "Missing item type\nGet the value for a particular key",
+            "line": " lib/settings.js:94"
+        },
+        {
+            "message": "Missing item type\nGet the value for a particular key",
+            "line": " lib/settings.js:103"
+        },
+        {
+            "message": "Missing item type\nGet the value for a particular key",
+            "line": " lib/settings.js:112"
+        },
+        {
+            "message": "Missing item type\nConstructor Properties",
+            "line": " lib/settings.js:122"
+        },
+        {
+            "message": "Missing item type\nDebugger",
+            "line": " lib/settings.js:128"
+        },
+        {
+            "message": "Missing item type\nExtend Target with Source",
+            "line": " lib/settings.js:137"
+        },
+        {
+            "message": "Missing item type\nMixes Settings Options into current context",
+            "line": " lib/settings.js:159"
+        },
+        {
+            "message": "Missing item type\nMixes Settings Options into a target object",
+            "line": " lib/settings.js:169"
+        },
+        {
+            "message": "Missing item type\nBasic Object Settings Tests\n\n## Standalone\nmocha basic --reporter list --ui exports --watch",
+            "line": " test/basic.js:1"
+        },
+        {
+            "message": "Missing item type\nPrepare Environment",
+            "line": " test/basic.js:11"
+        },
+        {
+            "message": "Missing item type\nDestroy Environment",
+            "line": " test/basic.js:115"
+        }
+    ]
+}
