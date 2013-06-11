@@ -1,6 +1,2 @@
-.DS_Store
-.idea/*
-.svn
-test/
+.*
 node_modules/
-.npmignore
