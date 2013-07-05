@@ -3,9 +3,22 @@
   "description": "Object settings mixin with EventEmitter and change queue.",
   "main": "./lib/settings",
   "author": {
-    "name": "Andy Potanin",
+    "name": "Usability Dynamics",
+    "email": "info@usabilitydynamics.com",
     "url": "http://usabilitydynamics.com"
   },
+  "contributors": [
+    {
+      "name": "Andy Potanin",
+      "email": "andy.potanin@usabilitydynamics.com",
+      "url": "http://usabilitydynamics.com"
+    },
+    {
+      "name": "Ivan McCarthy",
+      "email": "ivan.mccarthy@usabilitydynamics.com",
+      "url": "http://usabilitydynamics.com"
+    }
+  ],
   "keywords": [
     "object",
     "emitter"
@@ -19,6 +32,7 @@
     "url": "https://github.com/usabilitydynamics/object-settings/issues"
   },
   "dependencies": {
+    "abstract": "*",
     "debug": "*"
   },
   "devDependencies": {
