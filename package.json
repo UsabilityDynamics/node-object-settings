@@ -1,7 +1,7 @@
 {
   "name": "object-settings",
   "description": "Object settings mixin with EventEmitter and change queue.",
-  "main": "./lib/settings",
+  "main": "index",
   "author": {
     "name": "Usability Dynamics",
     "email": "info@usabilitydynamics.com",
