@@ -13,16 +13,10 @@ module.exports = {
    *
    */
   'before': function() {
-
-    // Dependancies
     module.mocha = require( 'mocha' );
     module.should = require( 'should' );
     module.user = require( 'Faker' ).Helpers.userCard;
     module.constructor = require( '../' );
-
-    // Configuration
-    module.settings = {};
-
   },
 
   "Object Settings": {
@@ -78,6 +72,7 @@ module.exports = {
       'uses to target object': function() {
 
         var Target = module.user();
+
         module.constructor.use( Target );
 
         //Target.should.have.property( 'settings' );
