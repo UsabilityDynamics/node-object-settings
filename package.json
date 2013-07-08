@@ -26,10 +26,10 @@
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/usabilitydynamics/object-settings.git"
+    "url": "https://github.com/UsabilityDynamics/object-settings.git"
   },
   "bugs": {
-    "url": "https://github.com/usabilitydynamics/object-settings/issues"
+    "url": "https://github.com/UsabilityDynamics/object-settings/issues"
   },
   "dependencies": {
     "abstract": "*",
