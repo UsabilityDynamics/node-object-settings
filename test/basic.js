@@ -13,10 +13,9 @@ module.exports = {
    *
    */
   'before': function() {
-    module.mocha = require( 'mocha' );
     module.should = require( 'should' );
     module.user = require( 'Faker' ).Helpers.userCard;
-    module.constructor = require( '../' );
+    module.Settings = require( '../' );
   },
 
   "Object Settings": {
@@ -24,10 +23,11 @@ module.exports = {
     'constructor': {
 
       'has expected properties': function() {
-        module.constructor.should.have.property( 'debug' );
-        module.constructor.should.have.property( 'extend' );
-        module.constructor.should.have.property( 'use' );
-        module.constructor.should.have.property( 'mixin' );
+        module.Settings.should.have.property( 'configure' );
+        module.Settings.should.have.property( 'create' );
+        module.Settings.should.have.property( 'debug' );
+        module.Settings.should.have.property( 'use' );
+        module.Settings.should.have.property( 'mixin' );
       }
 
     },
@@ -39,9 +39,9 @@ module.exports = {
         var Target = module.user();
 
         // Add Object Settings to a property
-        Target.settings = new module.constructor;
+        Target.settings = module.Settings.create();
 
-        Target.settings.should.have.property( 'settings' );
+        Target.settings.should.have.property( '_meta' );
         Target.settings.should.have.property( 'get' );
         Target.settings.should.have.property( 'set' );
         Target.settings.should.have.property( 'enable' );
@@ -53,18 +53,18 @@ module.exports = {
 
         var Target = module.user();
 
-        Target.settings = module.constructor.create();
+        Target.settings = module.Settings.create();
 
         Target.should.have.property( 'settings' );
         Target.settings.should.have.property( 'get' );
         Target.settings.should.have.property( 'set' );
         Target.settings.should.have.property( 'enable' );
         Target.settings.should.have.property( 'disable' );
-        Target.settings.should.have.property( 'settings' );
+        Target.settings.should.have.property( '_meta' );
         Target.settings.set( 'name', 'andy' );
 
         // Settings will be double nested on unbound instances
-        Target.settings.settings.should.have.property( 'name', 'andy' );
+        Target.settings._meta.should.have.property( 'name', 'andy' );
 
 
       },
@@ -73,9 +73,9 @@ module.exports = {
 
         var Target = module.user();
 
-        module.constructor.use( Target );
+        module.Settings.mixin( Target );
 
-        //Target.should.have.property( 'settings' );
+        //Target.should.have.property( '_meta' );
         Target.should.have.property( 'get' );
         Target.should.have.property( 'set' );
         Target.should.have.property( 'enable' );
@@ -87,7 +87,7 @@ module.exports = {
       'sets data': function() {
 
         var Target = module.user();
-        module.constructor.use( Target );
+        module.Settings.mixin( Target );
 
         Target.set( 'color', 'blue' );
         Target.set( 'color2', 'red' );
@@ -100,7 +100,8 @@ module.exports = {
       'emits events': function( done ) {
 
         var Target = new ( require( 'eventemitter2' ) ).EventEmitter2({ 'wildcard': true });
-        Target.settings = module.constructor.use( Target );
+
+        Target.settings = module.Settings.mixin( Target );
 
         Target.once( 'set.color', function( error, value, key ) {
           value.should.be.equal( 'blue' );
@@ -118,8 +119,14 @@ module.exports = {
 
       'can set defaults': function() {
         var Target = module.user();
-        module.constructor.use( Target, { 'color': 'blue' } );
-        Target.settings.should.have.property( 'color', 'blue' );
+
+        module.Settings.mixin( Target, {
+          'color': 'blue',
+          'size': 'large'
+        });
+
+        Target._meta.should.have.property( 'color', 'blue' );
+        Target._meta.should.have.property( 'size', 'large' );
       },
 
       'can bind settings to prototype object': function() {
@@ -134,15 +141,15 @@ module.exports = {
           'walk': function() {}
         }
 
-        module.constructor.use( Person );
+        module.Settings.mixin( Person );
 
         Person.set( 'nothing', 'blah' )
 
-        Person.should.have.property( 'settings' );
-        Person.settings.should.have.property( 'nothing' );
+        Person.should.have.property( '_meta' );
+        Person._meta.should.have.property( 'nothing' );
 
         // Bind Settings
-        module.constructor.use( Person.prototype );
+        module.Settings.mixin( Person.prototype );
 
         // Add protoypal setting
         Person.prototype.set( 'height', 72 );
@@ -150,11 +157,11 @@ module.exports = {
         Person.prototype.should.have.property( 'set' );
         Person.prototype.should.have.property( 'get' );
         Person.prototype.should.have.property( 'enable' );
-        Person.prototype.should.have.property( 'settings' );
-        Person.prototype.settings.should.have.property( 'height', 72 );
+        Person.prototype.should.have.property( '_meta' );
+        Person.prototype._meta.should.have.property( 'height', 72 );
 
-        // Constructor settings should not be here
-        Person.prototype.settings.should.not.have.property( 'nothing' );
+        // Constructor _meta should not be here
+        Person.prototype._meta.should.not.have.property( 'nothing' );
 
         // Create instance
         var Bob = new Person( 'Bob' );
@@ -163,24 +170,18 @@ module.exports = {
         Bob.should.have.property( 'get' );
         Bob.should.have.property( 'enable' );
         Bob.should.have.property( 'age', 50 );
-        Bob.should.have.property( 'settings' );
+        Bob.should.have.property( '_meta' );
 
         // Constructor settings should not be here
-        Bob.settings.should.not.have.property( 'nothing' );
+        Bob._meta.should.not.have.property( 'nothing' );
 
         // Protoypal setting was inherited
-        Bob.settings.should.have.property( 'height', 72 );
+        Bob._meta.should.have.property( 'height', 72 );
 
       },
 
     }
 
-  },
-
-  /**
-   * Destroy Environment
-   *
-   */
-  'after': function() {}
+  }
 
 };
