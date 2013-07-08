@@ -9,16 +9,22 @@ Add Settings methods to a basic Object.
     var ObjectSettings = require( 'object-settings' );
 
     // Create target object
-    var MyObject = {
-      my_data: {},
-      my_method: function() {}
+    MyObject = {
+     my_data: {},
+     my_method: function() {}
     };
 
     // Mixin Object Setting methods into MyObject
-    ObjectSettings.use( MyObject );
+    ObjectSettings.mixin( MyObject );
 
-    // Bind to Object and also load into "settings" property
-    MyObject.settings = ObjectSettings.use( MyObject );
+    // Set a key and value
+    MyObject.set( 'first_name', 'John' );
+
+    // Set via an object
+    MyObject.set({
+     'age': 42,
+     'last_name': 'Adams'
+    });
 
 ## Advanced Usage
 
@@ -76,8 +82,6 @@ The below methods are available once an Object Settigns instance is created.
     .set( obj )
     .enable( name )
     .disable( name )
-    .enabled( name )
-    .disabled( name )
 
 ## Event Usage
 If your object is EventEmitter-capable the Object Settings will emit events when settings are changed.

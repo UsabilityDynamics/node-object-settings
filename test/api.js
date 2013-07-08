@@ -1,8 +1,8 @@
 /**
- * Basic Object Settings Tests
+ * General Object Settings Tests
  *
  * ## Standalone
- * mocha basic --reporter list --ui exports --watch
+ * mocha api.js --reporter list --ui exports --watch
  *
  * @type {Object}
  */
@@ -23,7 +23,6 @@ module.exports = {
     'constructor': {
 
       'has expected properties': function() {
-        module.Settings.should.have.property( 'configure' );
         module.Settings.should.have.property( 'create' );
         module.Settings.should.have.property( 'use' );
         module.Settings.should.have.property( 'mixin' );

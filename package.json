@@ -1,6 +1,7 @@
 {
   "name": "object-settings",
-  "description": "Object settings mixin with EventEmitter and change queue.",
+  "description": "Object settings.",
+  "version": "0.0.2",
   "main": "index",
   "author": {
     "name": "Usability Dynamics",
@@ -23,7 +24,6 @@
     "object",
     "emitter"
   ],
-  "version": "0.0.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/UsabilityDynamics/object-settings.git"
@@ -36,6 +36,8 @@
     "debug": "*"
   },
   "devDependencies": {
+    "yuidocjs": "*",
+    "Faker": "*",
     "Faker": "*",
     "mocha": "*",
     "should": "*"
