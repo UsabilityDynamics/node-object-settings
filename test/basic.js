@@ -25,7 +25,6 @@ module.exports = {
       'has expected properties': function() {
         module.Settings.should.have.property( 'configure' );
         module.Settings.should.have.property( 'create' );
-        module.Settings.should.have.property( 'debug' );
         module.Settings.should.have.property( 'use' );
         module.Settings.should.have.property( 'mixin' );
       }
