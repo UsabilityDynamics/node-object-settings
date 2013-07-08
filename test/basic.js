@@ -120,13 +120,16 @@ module.exports = {
       'can set defaults': function() {
         var Target = module.user();
 
-        module.Settings.mixin( Target, {
+        module.Settings.mixin( Target );
+
+        Target.set({
           'color': 'blue',
           'size': 'large'
         });
 
-        Target._meta.should.have.property( 'color', 'blue' );
-        Target._meta.should.have.property( 'size', 'large' );
+        Target.get( 'color' ).should.equal( 'blue' );
+        Target.get( 'size' ).should.equal( 'large' );
+
       },
 
       'can bind settings to prototype object': function() {
