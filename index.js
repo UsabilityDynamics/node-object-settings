@@ -4,5 +4,5 @@
  * @author potanin@UD
  * @date 6/18/13
  */
-module.exports = process.env.APP_COVERAGE ? require( './static/lib-cov/settings' ) : require( './lib/settings' );
+module.exports = process.env.APP_COVERAGE ? require( './static/lib-cov/object-settings' ) : require( './lib/object-settings' );
 

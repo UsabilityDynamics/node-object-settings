@@ -18,170 +18,182 @@ module.exports = {
     module.Settings = require( '../' );
   },
 
-  "Object Settings": {
+  "Object Settings API": {
 
-    'constructor': {
+    'has expected properties': function() {
+      var ObjectSettings = require( '../' );
+      ObjectSettings.should.have.property( 'create' );
+      ObjectSettings.should.have.property( 'use' );
+      ObjectSettings.should.have.property( 'mixin' );
+    },
 
-      'has expected properties': function() {
-        module.Settings.should.have.property( 'create' );
-        module.Settings.should.have.property( 'use' );
-        module.Settings.should.have.property( 'mixin' );
-      }
+    'returns expected properties': function() {
+
+      var Target = module.user();
+
+      // Add Object Settings to a property
+      Target.settings = module.Settings.create();
+
+      Target.settings.should.have.property( '_meta' );
+      Target.settings.should.have.property( 'get' );
+      Target.settings.should.have.property( 'set' );
+      Target.settings.should.have.property( 'enable' );
+      Target.settings.should.have.property( 'disable' );
 
     },
 
-    'instance': {
+    'can create empty instance': function() {
 
-      'returns expected properties': function() {
+      var Target = module.user();
 
-        var Target = module.user();
+      Target.settings = module.Settings.create();
 
-        // Add Object Settings to a property
-        Target.settings = module.Settings.create();
+      Target.should.have.property( 'settings' );
+      Target.settings.should.have.property( 'get' );
+      Target.settings.should.have.property( 'set' );
+      Target.settings.should.have.property( 'enable' );
+      Target.settings.should.have.property( 'disable' );
+      Target.settings.should.have.property( '_meta' );
+      Target.settings.set( 'name', 'andy' );
 
-        Target.settings.should.have.property( '_meta' );
-        Target.settings.should.have.property( 'get' );
-        Target.settings.should.have.property( 'set' );
-        Target.settings.should.have.property( 'enable' );
-        Target.settings.should.have.property( 'disable' );
-
-      },
-
-      'can create empty instance': function() {
-
-        var Target = module.user();
-
-        Target.settings = module.Settings.create();
-
-        Target.should.have.property( 'settings' );
-        Target.settings.should.have.property( 'get' );
-        Target.settings.should.have.property( 'set' );
-        Target.settings.should.have.property( 'enable' );
-        Target.settings.should.have.property( 'disable' );
-        Target.settings.should.have.property( '_meta' );
-        Target.settings.set( 'name', 'andy' );
-
-        // Settings will be double nested on unbound instances
-        Target.settings._meta.should.have.property( 'name', 'andy' );
+      // Settings will be double nested on unbound instances
+      Target.settings._meta.should.have.property( 'name', 'andy' );
 
 
-      },
+    },
 
-      'uses to target object': function() {
+    'uses to target object': function() {
 
-        var Target = module.user();
+      var Target = module.user();
 
-        module.Settings.mixin( Target );
+      module.Settings.mixin( Target );
 
-        //Target.should.have.property( '_meta' );
-        Target.should.have.property( 'get' );
-        Target.should.have.property( 'set' );
-        Target.should.have.property( 'enable' );
-        Target.should.have.property( 'disable' );
-        Target.set( 'name', 'andy' );
+      //Target.should.have.property( '_meta' );
+      Target.should.have.property( 'get' );
+      Target.should.have.property( 'set' );
+      Target.should.have.property( 'enable' );
+      Target.should.have.property( 'disable' );
+      Target.set( 'name', 'andy' );
 
-      },
+    },
 
-      'sets data': function() {
+    'sets data': function() {
 
-        var Target = module.user();
-        module.Settings.mixin( Target );
+      var Target = module.user();
+      module.Settings.mixin( Target );
 
-        Target.set( 'color', 'blue' );
-        Target.set( 'color2', 'red' );
-        Target.set( 'color', 'green' );
-        Target.set({ "dasf": "adsf" });
-        Target.set({ "dasf2": { 'asdfdsf': "asdfsdf" } });
+      Target.set( 'color', 'blue' );
+      Target.set( 'color2', 'red' );
+      Target.set( 'color', 'green' );
+      Target.set( { "dasf": "adsf" } );
+      Target.set( { "dasf2": { 'asdfdsf': "asdfsdf" } } );
 
-      },
+    },
 
-      'emits events': function( done ) {
+    "supports dot notation": function() {
+      var ObjectSettings = require( '../' );
 
-        var Target = new ( require( 'eventemitter2' ) ).EventEmitter2({ 'wildcard': true });
+      // Add values using dot notation
+      ObjectSettings.set( 'name.first', 'John' );
+      ObjectSettings.set( 'name.last', 'Smith' );
 
-        Target.settings = module.Settings.mixin( Target );
+      // Get crated object
+      ObjectSettings.get( 'name' ).should.have.property( 'first', 'John' );
+      ObjectSettings.get( 'name' ).should.have.property( 'last', 'Smith' );
 
-        Target.once( 'set.color', function( error, value, key ) {
-          value.should.be.equal( 'blue' );
-          key.should.be.equal( 'color' );
-          done();
-        })
+      // Get by dot notation
+      ObjectSettings.get( 'name.first' ).should.equal( 'John' );
+      ObjectSettings.get( 'name.last' ).should.equal( 'Smith' );
 
-        Target.set( 'color', 'blue' );
-        Target.set( 'color2', 'red' );
-        Target.set( 'color', 'green' );
-        Target.set({ "dasf": "adsf" });
-        Target.set({ "dasf2": { 'asdfdsf': "asdfsdf" } });
+    },
 
-      },
+    'emits events': function( done ) {
 
-      'can set defaults': function() {
-        var Target = module.user();
+      var Target = new ( require( 'eventemitter2' ) ).EventEmitter2( { 'wildcard': true } );
 
-        module.Settings.mixin( Target );
+      Target.settings = module.Settings.mixin( Target );
 
-        Target.set({
-          'color': 'blue',
-          'size': 'large'
-        });
+      Target.once( 'set.color', function( error, value, key ) {
+        value.should.be.equal( 'blue' );
+        key.should.be.equal( 'color' );
+        done();
+      })
 
-        Target.get( 'color' ).should.equal( 'blue' );
-        Target.get( 'size' ).should.equal( 'large' );
+      Target.set( 'color', 'blue' );
+      Target.set( 'color2', 'red' );
+      Target.set( 'color', 'green' );
+      Target.set( { "dasf": "adsf" } );
+      Target.set( { "dasf2": { 'asdfdsf': "asdfsdf" } } );
 
-      },
+    },
 
-      'can bind settings to prototype object': function() {
+    'can set defaults': function() {
+      var Target = module.user();
 
-        function Person( name ) {
-          this.name = name;
+      module.Settings.mixin( Target );
+
+      Target.set( {
+        'color': 'blue',
+        'size': 'large'
+      } );
+
+      Target.get( 'color' ).should.equal( 'blue' );
+      Target.get( 'size' ).should.equal( 'large' );
+
+    },
+
+    'can bind settings to prototype object': function() {
+
+      function Person( name ) {
+        this.name = name;
+      }
+
+      Person.prototype = {
+        'age': 50,
+        'run': function() {
+        },
+        'walk': function() {
         }
+      }
 
-        Person.prototype = {
-          'age': 50,
-          'run': function() {},
-          'walk': function() {}
-        }
+      module.Settings.mixin( Person );
 
-        module.Settings.mixin( Person );
+      Person.set( 'nothing', 'blah' )
 
-        Person.set( 'nothing', 'blah' )
+      Person.should.have.property( '_meta' );
+      Person._meta.should.have.property( 'nothing' );
 
-        Person.should.have.property( '_meta' );
-        Person._meta.should.have.property( 'nothing' );
+      // Bind Settings
+      module.Settings.mixin( Person.prototype );
 
-        // Bind Settings
-        module.Settings.mixin( Person.prototype );
+      // Add protoypal setting
+      Person.prototype.set( 'height', 72 );
 
-        // Add protoypal setting
-        Person.prototype.set( 'height', 72 );
+      Person.prototype.should.have.property( 'set' );
+      Person.prototype.should.have.property( 'get' );
+      Person.prototype.should.have.property( 'enable' );
+      Person.prototype.should.have.property( '_meta' );
+      Person.prototype._meta.should.have.property( 'height', 72 );
 
-        Person.prototype.should.have.property( 'set' );
-        Person.prototype.should.have.property( 'get' );
-        Person.prototype.should.have.property( 'enable' );
-        Person.prototype.should.have.property( '_meta' );
-        Person.prototype._meta.should.have.property( 'height', 72 );
+      // Constructor _meta should not be here
+      Person.prototype._meta.should.not.have.property( 'nothing' );
 
-        // Constructor _meta should not be here
-        Person.prototype._meta.should.not.have.property( 'nothing' );
+      // Create instance
+      var Bob = new Person( 'Bob' );
 
-        // Create instance
-        var Bob = new Person( 'Bob' );
+      Bob.should.have.property( 'set' );
+      Bob.should.have.property( 'get' );
+      Bob.should.have.property( 'enable' );
+      Bob.should.have.property( 'age', 50 );
+      Bob.should.have.property( '_meta' );
 
-        Bob.should.have.property( 'set' );
-        Bob.should.have.property( 'get' );
-        Bob.should.have.property( 'enable' );
-        Bob.should.have.property( 'age', 50 );
-        Bob.should.have.property( '_meta' );
+      // Constructor settings should not be here
+      Bob._meta.should.not.have.property( 'nothing' );
 
-        // Constructor settings should not be here
-        Bob._meta.should.not.have.property( 'nothing' );
+      // Protoypal setting was inherited
+      Bob._meta.should.have.property( 'height', 72 );
 
-        // Protoypal setting was inherited
-        Bob._meta.should.have.property( 'height', 72 );
-
-      },
-
-    }
+    },
 
   }
 
