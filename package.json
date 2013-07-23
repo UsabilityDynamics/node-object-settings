@@ -1,7 +1,7 @@
 {
   "name": "object-settings",
   "description": "Object settings.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "index",
   "author": {
     "name": "Usability Dynamics",
@@ -45,5 +45,5 @@
   "scripts": {
     "test": "make test"
   },
-  "readmeFilename": "Readme.md"
+  "readmeFilename": "readme.md"
 }

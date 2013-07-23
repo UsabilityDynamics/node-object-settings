@@ -111,12 +111,24 @@ require( &#x27;abstract&#x27; ).createModel( function Settings( exports ) {
      */
     get: function get( key, fallback ) {
 
+      // Create object meta if it does not exist
+      if( !this._meta ) {
+        Object.defineProperty( this, &#x27;_meta&#x27;, {
+          value: {},
+          enumerable: false,
+          writable: true,
+          configurable: true
+        });
+      }
+
       // Return empty full meta object if no key specified
       if( &#x27;undefined&#x27; === typeof key ) {
         return this._meta || {};
       }
 
-      return this._meta ? this._meta[ arguments[0] ] : fallback || this._meta;
+      var value = require( &#x27;abstract&#x27; ).utility.query( this._meta, arguments[0] );
+
+      return value || fallback || undefined;
 
     },
     /**
@@ -129,7 +141,7 @@ require( &#x27;abstract&#x27; ).createModel( function Settings( exports ) {
      */
     set: function set( key, value ) {
 
-      // Get or create and get storage
+      // Create object meta if it does not exist
       if( !this._meta ) {
         Object.defineProperty( this, &#x27;_meta&#x27;, {
           value: {},
@@ -148,8 +160,11 @@ require( &#x27;abstract&#x27; ).createModel( function Settings( exports ) {
       var emit = this.emit ? this.emit.bind( this ) : function emit() {};
 
       // Key &amp; Value Passed
-      if( Object.keys( arguments ).length === 2 ) {
-        this._meta[ arguments[0] ] = arguments[1];
+      if( Object.keys( arguments ).length === 2 &amp;&amp; ( &#x27;string&#x27; === typeof arguments[0] || &#x27;number&#x27; === typeof arguments[0] ) ) {
+
+        // Honor dot notation
+        require( &#x27;abstract&#x27; ).utility.unwrap( arguments[0], arguments[1], this._meta );
+
         emit( [ &#x27;set&#x27;, arguments[0] ], null, arguments[1], arguments[0] );
       }
 
@@ -199,7 +214,7 @@ require( &#x27;abstract&#x27; ).createModel( function Settings( exports ) {
   });
 
   // Define instance constructor and bind to module.exports
-  exports.defineInstance( function( defaults ) {
+  exports.defineConstructor( function( defaults ) {
     this.set( defaults );
   });
 

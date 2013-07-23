@@ -54,7 +54,7 @@
         },
         {
             "file": "lib/object-settings.js",
-            "line": 34,
+            "line": 46,
             "description": "Set Key & Value pair, or pass an object",
             "itemtype": "method",
             "name": "key",
@@ -78,7 +78,7 @@
         },
         {
             "file": "lib/object-settings.js",
-            "line": 83,
+            "line": 98,
             "description": "Enable an Option",
             "params": [
                 {
@@ -90,7 +90,7 @@
         },
         {
             "file": "lib/object-settings.js",
-            "line": 102,
+            "line": 117,
             "description": "Disable an Option",
             "params": [
                 {
@@ -120,11 +120,11 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib/object-settings.js:34"
+            "line": " lib/object-settings.js:46"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib/object-settings.js:102"
+            "line": " lib/object-settings.js:117"
         },
         {
             "message": "Missing item type\nGet or create and get storage",
@@ -132,11 +132,11 @@
         },
         {
             "message": "Missing item type\nEnable an Option",
-            "line": " lib/object-settings.js:83"
+            "line": " lib/object-settings.js:98"
         },
         {
             "message": "Missing item type\nDisable an Option",
-            "line": " lib/object-settings.js:102"
+            "line": " lib/object-settings.js:117"
         }
     ]
 }
