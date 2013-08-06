@@ -5,100 +5,104 @@ This is similar to the "Configurable" module but provides several additional fun
 ## Basic Usage
 Add Settings methods to a basic Object.
 
-    // Get module
-    var ObjectSettings = require( 'object-settings' );
+```javascript
+  // Get module
+  var ObjectSettings = require( 'object-settings' );
 
-    // Create target object
-    MyObject = {
-     my_data: {},
-     my_method: function() {}
-    };
+  // Create target object
+  MyObject = {
+   my_data: {},
+   my_method: function() {}
+  };
 
-    // Mixin Object Setting methods into MyObject
-    ObjectSettings.mixin( MyObject );
+  // Mixin Object Setting methods into MyObject
+  ObjectSettings.mixin( MyObject );
 
-    // Set a key and value
-    MyObject.set( 'first_name', 'John' );
+  // Set a key and value
+  MyObject.set( 'first_name', 'John' );
 
-    // Set via an object
-    MyObject.set({
-     'age': 42,
-     'last_name': 'Adams'
-    });
+  // Set via an object
+  MyObject.set({
+   'age': 42,
+   'last_name': 'Adams'
+  });
+```
 
 ## Advanced Usage
 
-    // Create target object
-    var MyObject = {};
+```javascript
+  // Create target object
+  var MyObject = {};
 
-    // Set properties and apply Object Settings to a property
-    Object.defineProperties( MyObject, {
-      "my_data": {
-        "value": {}
-      },
-      "settings": {
-        "value": new ObjectSettings
-      }
-    });
+  // Set properties and apply Object Settings to a property
+  Object.defineProperties( MyObject, {
+    "my_data": {
+      "value": {}
+    },
+    "settings": {
+      "value": new ObjectSettings
+    }
+  });
 
-    // Interact with settings via the custom property
-    MyObject.settings.set( 'some key', 'some value' );
+  // Interact with settings via the custom property
+  MyObject.settings.set( 'some key', 'some value' );
+```
 
 ## Setting Defaults
 
-    // Get module
-    var ObjectSettings = require( 'object-settings' );
+```javascript
+  // Get module
+  var ObjectSettings = require( 'object-settings' );
 
-    // Create target object
-    var MyObject = {
-      my_data: {},
-      my_method: function() {}
-    };
+  // Create target object
+  var MyObject = {
+    my_data: {},
+    my_method: function() {}
+  };
 
-    // Bind to Object with default settings
-    MyObject.settings = ObjectSettings.use( MyObject, {
-      "name": "Sparky",
-      "color": "red"
-    });
-
-## Prototypal Usage
-
-    // Extend the prototype configurable
-    ObjectSettings.mixin( MyObject.prototype );
+  // Bind to Object with default settings
+  MyObject.settings = ObjectSettings.use( MyObject, {
+    "name": "Sparky",
+    "color": "red"
+  });
+```
 
 ## Constructor Methods
 Constructor methods are only available on the non-initialized Object Settings module.
 
-    .debug()
-    .use()
-    .mixin()
-    .extend()
+  .debug()
+  .use()
+  .mixin()
+  .extend()
 
 ## Object Settings' Methods
 The below methods are available once an Object Settigns instance is created.
 
-    .get( name )
-    .set( name, val )
-    .set( obj )
-    .enable( name )
-    .disable( name )
+  .get( name )
+  .set( name, val )
+  .set( obj )
+  .enable( name )
+  .disable( name )
 
 ## Event Usage
 If your object is EventEmitter-capable the Object Settings will emit events when settings are changed.
 
-    // Trigger an event when the name is set
-    MyClass.on( "set:name", function( value, key ) {
-      console.log( key, "changed to ", value );
-    });
+```javascript
 
-    // Trigger an event when the name is set
-    MyClass.on( "disable:name", function( value, key ) {
-      console.log( key, "disabled" );
-    });
+  // Trigger an event when the name is set
+  MyClass.on( "set:name", function( value, key ) {
+    console.log( key, "changed to ", value );
+  });
 
-    // Set and disable the name, triggering the above events
-    MyClass.set( "name", "Sparky" );
-    MyClass.disable( "name" );
+  // Trigger an event when the name is set
+  MyClass.on( "disable:name", function( value, key ) {
+    console.log( key, "disabled" );
+  });
+
+  // Set and disable the name, triggering the above events
+  MyClass.set( "name", "Sparky" );
+  MyClass.disable( "name" );
+```
 
 ## License
 
