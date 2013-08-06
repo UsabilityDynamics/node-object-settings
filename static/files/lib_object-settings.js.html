@@ -128,7 +128,7 @@ require( &#x27;abstract&#x27; ).createModel( function Settings( exports ) {
 
       var value = require( &#x27;abstract&#x27; ).utility.query( this._meta, arguments[0] );
 
-      return value || fallback || undefined;
+      return value || fallback;
 
     },
     /**
