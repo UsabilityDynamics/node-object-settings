@@ -2,7 +2,7 @@
     "project": {
         "name": "Object Settings",
         "description": "Object settings mixin with EventEmitter and change queue.",
-        "version": "0.0.1",
+        "version": "0.0.5",
         "url": "https://github.com/UsabilityDynamics/object-settings/",
         "logo": "http://a3d72a45d111006ec192-ec5b80a12b0b09b4d52373336afb4254.r80.cf1.rackcdn.com/usability-dynamics.png"
     },
@@ -37,7 +37,24 @@
     "classitems": [
         {
             "file": "lib/object-settings.js",
-            "line": 18,
+            "line": 22,
+            "description": "Mixin the Emitter properties.",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Settings"
+        },
+        {
+            "file": "lib/object-settings.js",
+            "line": 69,
             "description": "Get or create and get storage",
             "params": [
                 {
@@ -54,7 +71,7 @@
         },
         {
             "file": "lib/object-settings.js",
-            "line": 46,
+            "line": 99,
             "description": "Set Key & Value pair, or pass an object",
             "itemtype": "method",
             "name": "key",
@@ -78,7 +95,7 @@
         },
         {
             "file": "lib/object-settings.js",
-            "line": 98,
+            "line": 155,
             "description": "Enable an Option",
             "params": [
                 {
@@ -90,7 +107,7 @@
         },
         {
             "file": "lib/object-settings.js",
-            "line": 117,
+            "line": 175,
             "description": "Disable an Option",
             "params": [
                 {
@@ -116,27 +133,31 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib/object-settings.js:18"
+            "line": " lib/object-settings.js:69"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib/object-settings.js:46"
+            "line": " lib/object-settings.js:99"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib/object-settings.js:117"
+            "line": " lib/object-settings.js:175"
+        },
+        {
+            "message": "Missing item type\nMixin the Emitter properties.",
+            "line": " lib/object-settings.js:22"
         },
         {
             "message": "Missing item type\nGet or create and get storage",
-            "line": " lib/object-settings.js:18"
+            "line": " lib/object-settings.js:69"
         },
         {
             "message": "Missing item type\nEnable an Option",
-            "line": " lib/object-settings.js:98"
+            "line": " lib/object-settings.js:155"
         },
         {
             "message": "Missing item type\nDisable an Option",
-            "line": " lib/object-settings.js:117"
+            "line": " lib/object-settings.js:175"
         }
     ]
 }

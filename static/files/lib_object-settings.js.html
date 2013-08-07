@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.1</em>
+            <em>API Docs for: 0.0.5</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -93,16 +93,67 @@
  * @class Settings
  * @constractor
  */
-require( &#x27;abstract&#x27; ).createModel( function Settings( exports ) {
+require( &#x27;abstract&#x27; ).createModel( module.exports = function Settings( exports ) {
 
-  // Expose as module
-  module.exports = exports;
+  // Construct Model only once.
+  if( module.loaded ) {
+    return Settings;
+  }
+
+  var util       = require( &#x27;util&#x27; );
+  var inherits   = require( &#x27;util&#x27; ).inherits;
+  var _extend    = require( &#x27;util&#x27; )._extend;
 
   // Constructor Properties
-  exports.mixin = require( &#x27;abstract&#x27; ).utility.mixin.bind( this, this )
+  Settings.defineProperties( Settings, {
+    mixin: {
+      /**
+       * Mixin the Emitter properties.
+       *
+       * @param {Object} obj
+       * @return {Object}
+       */
+      value: function mixin( obj ) {
+
+        for( var key in Settings.prototype ) {
+
+          var descriptor = Object.getOwnPropertyDescriptor( obj, key );
+
+          // Detect if a property is not configurable.
+          if( descriptor &amp;&amp; !descriptor.configurable ) {
+            break;
+          }
+
+          try {
+
+            Object.defineProperty( obj, key, {
+              value: obj[ key ] || Settings.prototype[ key ],
+              enumerable: false,
+              writable: true,
+              configurable: true
+            });
+
+          } catch( error ) {}
+
+        }
+
+        // Ensure we have an listener container.
+        if( !obj._events ) {
+          obj._events = {};
+        }
+
+        return obj;
+
+      },
+      enumerable: true,
+      configurable: true,
+      writable: true
+    }
+  });
 
   // Prototypal Properties
-  exports.properties( exports.prototype, {
+  Settings.properties( Settings.prototype, {
+
     /**
      * Get or create and get storage
      *
@@ -128,9 +179,11 @@ require( &#x27;abstract&#x27; ).createModel( function Settings( exports ) {
 
       var value = require( &#x27;abstract&#x27; ).utility.query( this._meta, arguments[0] );
 
+      // Return the found value or the fallback value
       return value || fallback;
 
     },
+
     /**
      * Set Key &amp; Value pair, or pass an object
      *
@@ -166,6 +219,7 @@ require( &#x27;abstract&#x27; ).createModel( function Settings( exports ) {
         require( &#x27;abstract&#x27; ).utility.unwrap( arguments[0], arguments[1], this._meta );
 
         emit( [ &#x27;set&#x27;, arguments[0] ], null, arguments[1], arguments[0] );
+
       }
 
       // Object Passed, extend
@@ -175,7 +229,9 @@ require( &#x27;abstract&#x27; ).createModel( function Settings( exports ) {
 
         // @todo Get object path using dot notation
         for( var key in arguments[0] ) {
-          if( arguments[0].hasOwnProperty( key ) ) { emit( [ &#x27;set&#x27;, key ], null, arguments[0][key], key ); }
+          if( arguments[0].hasOwnProperty( key ) ) {
+            emit( [ &#x27;set&#x27;, key ], null, arguments[0][key], key );
+          }
         }
 
       }
@@ -183,6 +239,7 @@ require( &#x27;abstract&#x27; ).createModel( function Settings( exports ) {
       return this;
 
     },
+
     /**
      * Enable an Option
      *
@@ -202,6 +259,7 @@ require( &#x27;abstract&#x27; ).createModel( function Settings( exports ) {
       this._meta[ key ] = true;
 
     },
+
     /**
      * Disable an Option
      *
@@ -211,6 +269,7 @@ require( &#x27;abstract&#x27; ).createModel( function Settings( exports ) {
     disable: function disable( key ) {
       return this._meta ? this._meta[ key ] = false : null;
     }
+
   });
 
   // Define instance constructor and bind to module.exports
