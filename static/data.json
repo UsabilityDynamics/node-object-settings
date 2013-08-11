@@ -2,7 +2,7 @@
     "project": {
         "name": "Object Settings",
         "description": "Object settings mixin with EventEmitter and change queue.",
-        "version": "0.0.5",
+        "version": "0.0.6",
         "url": "https://github.com/UsabilityDynamics/object-settings/",
         "logo": "http://a3d72a45d111006ec192-ec5b80a12b0b09b4d52373336afb4254.r80.cf1.rackcdn.com/usability-dynamics.png"
     },
@@ -38,6 +38,23 @@
         {
             "file": "lib/object-settings.js",
             "line": 22,
+            "description": "Force / Override properties\n\nIf object not provided will bind to context.",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Settings"
+        },
+        {
+            "file": "lib/object-settings.js",
+            "line": 54,
             "description": "Mixin the Emitter properties.",
             "params": [
                 {
@@ -54,7 +71,7 @@
         },
         {
             "file": "lib/object-settings.js",
-            "line": 69,
+            "line": 101,
             "description": "Get or create and get storage",
             "params": [
                 {
@@ -71,7 +88,7 @@
         },
         {
             "file": "lib/object-settings.js",
-            "line": 99,
+            "line": 131,
             "description": "Set Key & Value pair, or pass an object",
             "itemtype": "method",
             "name": "key",
@@ -95,7 +112,7 @@
         },
         {
             "file": "lib/object-settings.js",
-            "line": 155,
+            "line": 187,
             "description": "Enable an Option",
             "params": [
                 {
@@ -107,7 +124,7 @@
         },
         {
             "file": "lib/object-settings.js",
-            "line": 175,
+            "line": 207,
             "description": "Disable an Option",
             "params": [
                 {
@@ -133,31 +150,35 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib/object-settings.js:69"
+            "line": " lib/object-settings.js:101"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib/object-settings.js:99"
+            "line": " lib/object-settings.js:131"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib/object-settings.js:175"
+            "line": " lib/object-settings.js:207"
         },
         {
-            "message": "Missing item type\nMixin the Emitter properties.",
+            "message": "Missing item type\nForce / Override properties\n\nIf object not provided will bind to context.",
             "line": " lib/object-settings.js:22"
         },
         {
+            "message": "Missing item type\nMixin the Emitter properties.",
+            "line": " lib/object-settings.js:54"
+        },
+        {
             "message": "Missing item type\nGet or create and get storage",
-            "line": " lib/object-settings.js:69"
+            "line": " lib/object-settings.js:101"
         },
         {
             "message": "Missing item type\nEnable an Option",
-            "line": " lib/object-settings.js:155"
+            "line": " lib/object-settings.js:187"
         },
         {
             "message": "Missing item type\nDisable an Option",
-            "line": " lib/object-settings.js:175"
+            "line": " lib/object-settings.js:207"
         }
     ]
 }

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.5</em>
+            <em>API Docs for: 0.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -106,6 +106,38 @@ require( &#x27;abstract&#x27; ).createModel( module.exports = function Settings(
 
   // Constructor Properties
   Settings.defineProperties( Settings, {
+    inject: {
+      /**
+       * Force / Override properties
+       *
+       * If object not provided will bind to context.
+       *
+       * @param {Object} obj
+       * @return {Object}
+       */
+      value: function inject( obj ) {
+
+        var target = obj || this;
+        var Instance = new Settings.create();
+
+        Object.getOwnPropertyNames( Settings.prototype ).forEach( function( key ) {
+
+          Object.defineProperty( target, key, {
+            value: Instance[ key ],
+            enumerable: false,
+            writable: true,
+            configurable: true
+          });
+
+        });
+
+        return target;
+
+      },
+      enumerable: true,
+      configurable: true,
+      writable: true
+    },
     mixin: {
       /**
        * Mixin the Emitter properties.
@@ -273,7 +305,7 @@ require( &#x27;abstract&#x27; ).createModel( module.exports = function Settings(
   });
 
   // Define instance constructor and bind to module.exports
-  exports.defineConstructor( function( defaults ) {
+  Settings.defineConstructor( function( defaults ) {
     this.set( defaults );
   });
 
