@@ -26,10 +26,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/UsabilityDynamics/object-settings.git"
+    "url": "https://github.com/UsabilityDynamics/node-object-settings.git"
   },
   "bugs": {
-    "url": "https://github.com/UsabilityDynamics/object-settings/issues"
+    "url": "https://github.com/UsabilityDynamics/node-object-settings/issues"
   },
   "dependencies": {
     "abstract": ">=0.0.2",
