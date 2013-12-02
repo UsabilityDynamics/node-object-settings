@@ -1,10 +1,10 @@
 {
     "project": {
-        "name": "Object Settings",
-        "description": "Object settings mixin with EventEmitter and change queue.",
-        "version": "0.0.6",
-        "url": "https://github.com/UsabilityDynamics/object-settings/",
-        "logo": "http://a3d72a45d111006ec192-ec5b80a12b0b09b4d52373336afb4254.r80.cf1.rackcdn.com/usability-dynamics.png"
+        "name": "object-settings",
+        "description": "Object settings.",
+        "version": "0.1.0",
+        "url": "",
+        "logo": "http://media.usabilitydynamics.com/logo.png"
     },
     "files": {
         "lib/object-settings.js": {
@@ -112,7 +112,7 @@
         },
         {
             "file": "lib/object-settings.js",
-            "line": 187,
+            "line": 188,
             "description": "Enable an Option",
             "params": [
                 {
@@ -124,7 +124,7 @@
         },
         {
             "file": "lib/object-settings.js",
-            "line": 207,
+            "line": 208,
             "description": "Disable an Option",
             "params": [
                 {
@@ -158,7 +158,7 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib/object-settings.js:207"
+            "line": " lib/object-settings.js:208"
         },
         {
             "message": "Missing item type\nForce / Override properties\n\nIf object not provided will bind to context.",
@@ -174,11 +174,11 @@
         },
         {
             "message": "Missing item type\nEnable an Option",
-            "line": " lib/object-settings.js:187"
+            "line": " lib/object-settings.js:188"
         },
         {
             "message": "Missing item type\nDisable an Option",
-            "line": " lib/object-settings.js:207"
+            "line": " lib/object-settings.js:208"
         }
     ]
 }
