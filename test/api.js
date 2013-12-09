@@ -15,13 +15,13 @@ module.exports = {
   'before': function() {
     module.should = require( 'should' );
     module.user = require( 'Faker' ).Helpers.userCard;
-    module.Settings = require( '../' );
+    module.Settings = require( '.' );
   },
 
   "Object Settings API": {
 
     'has expected properties': function() {
-      var ObjectSettings = require( '../' );
+      var ObjectSettings = require( '.' );
       ObjectSettings.should.have.property( 'create' );
       ObjectSettings.should.have.property( 'use' );
       ObjectSettings.should.have.property( 'mixin' );
@@ -91,7 +91,7 @@ module.exports = {
     },
 
     "supports dot notation": function() {
-      var ObjectSettings = require( '../' );
+      var ObjectSettings = require( '.' );
 
       // Add values using dot notation
       ObjectSettings.set( 'name.first', 'John' );
