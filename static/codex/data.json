@@ -2,7 +2,7 @@
     "project": {
         "name": "object-settings",
         "description": "Object settings.",
-        "version": "0.1.0",
+        "version": "0.1.2",
         "url": "",
         "logo": "http://media.usabilitydynamics.com/logo.png"
     },
@@ -37,7 +37,7 @@
     "classitems": [
         {
             "file": "lib/object-settings.js",
-            "line": 22,
+            "line": 23,
             "description": "Force / Override properties\n\nIf object not provided will bind to context.",
             "params": [
                 {
@@ -54,7 +54,7 @@
         },
         {
             "file": "lib/object-settings.js",
-            "line": 54,
+            "line": 78,
             "description": "Mixin the Emitter properties.",
             "params": [
                 {
@@ -71,13 +71,18 @@
         },
         {
             "file": "lib/object-settings.js",
-            "line": 101,
-            "description": "Get or create and get storage",
+            "line": 138,
+            "description": "Get or create and get storage\n\nRecognized Express application context and forwards to this._router.",
             "params": [
                 {
                     "name": "key",
                     "description": "",
                     "type": "String"
+                },
+                {
+                    "name": "fallback",
+                    "description": "",
+                    "type": "Function"
                 }
             ],
             "return": {
@@ -88,7 +93,7 @@
         },
         {
             "file": "lib/object-settings.js",
-            "line": 131,
+            "line": 188,
             "description": "Set Key & Value pair, or pass an object",
             "itemtype": "method",
             "name": "key",
@@ -112,7 +117,7 @@
         },
         {
             "file": "lib/object-settings.js",
-            "line": 188,
+            "line": 264,
             "description": "Enable an Option",
             "params": [
                 {
@@ -124,7 +129,7 @@
         },
         {
             "file": "lib/object-settings.js",
-            "line": 208,
+            "line": 284,
             "description": "Disable an Option",
             "params": [
                 {
@@ -150,35 +155,35 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib/object-settings.js:101"
+            "line": " lib/object-settings.js:138"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib/object-settings.js:131"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " lib/object-settings.js:208"
-        },
-        {
-            "message": "Missing item type\nForce / Override properties\n\nIf object not provided will bind to context.",
-            "line": " lib/object-settings.js:22"
-        },
-        {
-            "message": "Missing item type\nMixin the Emitter properties.",
-            "line": " lib/object-settings.js:54"
-        },
-        {
-            "message": "Missing item type\nGet or create and get storage",
-            "line": " lib/object-settings.js:101"
-        },
-        {
-            "message": "Missing item type\nEnable an Option",
             "line": " lib/object-settings.js:188"
         },
         {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " lib/object-settings.js:284"
+        },
+        {
+            "message": "Missing item type\nForce / Override properties\n\nIf object not provided will bind to context.",
+            "line": " lib/object-settings.js:23"
+        },
+        {
+            "message": "Missing item type\nMixin the Emitter properties.",
+            "line": " lib/object-settings.js:78"
+        },
+        {
+            "message": "Missing item type\nGet or create and get storage\n\nRecognized Express application context and forwards to this._router.",
+            "line": " lib/object-settings.js:138"
+        },
+        {
+            "message": "Missing item type\nEnable an Option",
+            "line": " lib/object-settings.js:264"
+        },
+        {
             "message": "Missing item type\nDisable an Option",
-            "line": " lib/object-settings.js:208"
+            "line": " lib/object-settings.js:284"
         }
     ]
 }

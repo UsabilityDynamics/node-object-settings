@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.1.0</em>
+            <em>API Docs for: 0.1.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -102,7 +102,8 @@ require( &#x27;abstract&#x27; ).createModel( module.exports = function Settings(
 
   var util        = require( &#x27;util&#x27; );
   var inherits    = require( &#x27;util&#x27; ).inherits;
-  var _extend     = require( &#x27;lodash&#x27; ).extend;
+  var _extend     = require( &#x27;abstract&#x27; ).utility.extend;
+  var _unwrap     = require( &#x27;abstract&#x27; ).utility.unwrap;
 
   // Constructor Properties
   Settings.defineProperties( Settings, {
@@ -115,23 +116,46 @@ require( &#x27;abstract&#x27; ).createModel( module.exports = function Settings(
        * @param {Object} obj
        * @return {Object}
        */
-      value: function inject( obj ) {
+      value: function inject( obj, property ) {
 
-        var target = obj || this;
         var Instance = new Settings.create();
+
+        if( !obj ) {
+          obj = this;
+        }
+
+        //console.log( &#x27;property&#x27;, typeof obj[ property ] );
 
         Object.getOwnPropertyNames( Settings.prototype ).forEach( function( key ) {
 
-          Object.defineProperty( target, key, {
+          var descriptor = Object.getOwnPropertyDescriptor( obj, key );
+
+          Object.defineProperty( obj, key, {
             value: Instance[ key ],
-            enumerable: false,
+            enumerable: descriptor ? descriptor.enumerable : false,
             writable: true,
             configurable: true
           });
 
         });
 
-        return target;
+        if( property &amp;&amp; &#x27;object&#x27; === typeof obj[ property ] ) {
+          Instance.set( obj[ property ] );
+        }
+
+        // Ensure we have an listener container.
+        if( !obj._events ) {
+
+          Object.defineProperty( obj, &#x27;_events&#x27;, {
+            value: {},
+            enumerable: true,
+            configurable: true,
+            writable: true
+          });
+
+        }
+
+        return obj;
 
       },
       enumerable: true,
@@ -171,12 +195,25 @@ require( &#x27;abstract&#x27; ).createModel( module.exports = function Settings(
 
         // Ensure we have an listener container.
         if( !obj._events ) {
-          obj._events = {};
+
+          Object.defineProperty( obj, &#x27;_events&#x27;, {
+            value: {},
+            enumerable: true,
+            configurable: true,
+            writable: true
+          });
+
         }
 
         return obj;
 
       },
+      enumerable: true,
+      configurable: true,
+      writable: true
+    },
+    version: {
+      value: require( &#x27;../package&#x27; ).version,
       enumerable: true,
       configurable: true,
       writable: true
@@ -189,10 +226,30 @@ require( &#x27;abstract&#x27; ).createModel( module.exports = function Settings(
     /**
      * Get or create and get storage
      *
+     * Recognized Express application context and forwards to this._router.
+     *
      * @param key {String}
+     * @param fallback {Function}
      * @returns {*|undefined}
      */
     get: function get( key, fallback ) {
+      var self = this;
+      var args = Array.prototype.slice.call( arguments );
+
+      // Support Express Application &quot;get&quot; method.
+      if( &#x27;function&#x27; === typeof arguments[1] &amp;&amp; &#x27;object&#x27; === typeof this._router ) {
+
+        // if no router attached yet, attach the router
+        if( !this._usedRouter ) {
+          this.use( this.router );
+        }
+
+        // setup route
+        this._router[ key ].apply( this._router, arguments );
+
+        return this;
+
+      }
 
       // Create object meta if it does not exist
       if( !this._meta ) {
@@ -225,7 +282,8 @@ require( &#x27;abstract&#x27; ).createModel( module.exports = function Settings(
      * @returns {Object} Context.
      */
     set: function set( key, value ) {
-      console.log( &#x27;set&#x27;, arguments[0] );
+      var self = this;
+      var args = Array.prototype.slice.call( arguments );
 
       // Create object meta if it does not exist
       if( !this._meta ) {
@@ -242,29 +300,47 @@ require( &#x27;abstract&#x27; ).createModel( module.exports = function Settings(
         return this;
       }
 
-      // Wrapper for Emit
-      var emit = this.emit ? this.emit.bind( this ) : function emit() {};
-
       // Key &amp; Value Passed
       if( Object.keys( arguments ).length === 2 &amp;&amp; ( &#x27;string&#x27; === typeof arguments[0] || &#x27;number&#x27; === typeof arguments[0] ) ) {
 
         // Honor dot notation
-        require( &#x27;abstract&#x27; ).utility.unwrap( arguments[0], arguments[1], this._meta );
+        _unwrap( arguments[0], arguments[1], this._meta );
 
-        emit( [ &#x27;set&#x27;, arguments[0] ], null, arguments[1], arguments[0] );
+        if( &#x27;function&#x27; === typeof self.emit ) {
+          self.emit( [ &#x27;set&#x27;, arguments[0] ].join( &#x27;.&#x27; ), null, arguments[1], arguments[0] );
+        }
 
       }
 
       // Object Passed, extend
       if( Object.keys( arguments ).length === 1 &amp;&amp; &#x27;object&#x27; === typeof arguments[0] ) {
 
-        require( &#x27;util&#x27; )._extend( this._meta, arguments[0] );
+        _extend( this._meta, arguments[0] );
 
-        // @todo Get object path using dot notation
-        for( var key in arguments[0] ) {
-          if( arguments[0].hasOwnProperty( key ) ) {
-            emit( [ &#x27;set&#x27;, key ], null, arguments[0][key], key );
+        if( &#x27;function&#x27; === typeof self.emit ) {
+
+          // @todo Get object path using dot notation, only goes two levels deep right now for emitting.
+          for( var _key in args[0] ) {
+
+            if( args[0][ _key  ] ) {
+
+              // console.log( &#x27;emitting&#x27;, [ &#x27;set&#x27;, _key  ].join( &#x27;.&#x27; ), args[0][_key ] );
+              self.emit( [ &#x27;set&#x27;, _key  ].join( &#x27;.&#x27; ), null, args[0][_key ], _key  );
+
+              if( &#x27;object&#x27; === typeof args[0][_key ] ) {
+
+                for( var __key  in args[0][_key ] ) {
+                  // console.log( &#x27;emitting&#x27;, [ &#x27;set&#x27;, _key , __key  ].join( &#x27;.&#x27; ),  args[0][_key ][__key ]);
+                  self.emit( [ &#x27;set&#x27;, _key, __key  ].join( &#x27;.&#x27; ), null, args[0][_key ][__key ], [ _key , __key  ].join( &#x27;.&#x27; ) );
+                }
+
+              }
+
+
+            }
+
           }
+
         }
 
       }
@@ -325,7 +401,7 @@ require( &#x27;abstract&#x27; ).createModel( module.exports = function Settings(
 <script src="../assets/vendor/prettify/prettify-min.js"></script>
 <script>prettyPrint();</script>
 <script src="../assets/js/yui-prettify.js"></script>
-<script src="../api.js"></script>
+<script src="../assets/../api.js"></script>
 <script src="../assets/js/api-filter.js"></script>
 <script src="../assets/js/api-list.js"></script>
 <script src="../assets/js/api-search.js"></script>
