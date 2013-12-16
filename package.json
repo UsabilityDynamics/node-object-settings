@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "abstract": "~0.1.2",
-    "lodash": "~2.4.0",
+    "lodash": "~2.4.1",
     "debug": "~0.7.4"
   },
   "devDependencies": {
