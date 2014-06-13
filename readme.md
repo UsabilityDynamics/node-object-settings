@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/usabilitydynamics/node-object-settings.png?label=ready&title=Ready)](https://waffle.io/usabilitydynamics/node-object-settings)
 # Object Settings
 Extends a custom JavaScript Object with "settings" methods.
 This is similar to the "Configurable" module but provides several additional functions, most notably usage of Events.
