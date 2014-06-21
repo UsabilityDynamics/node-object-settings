@@ -1,6 +1,4 @@
 [![CI](https://circleci.com/gh/UsabilityDynamics/node-object-settings.png?circle-token=d1cea6b8ce1ab5a424f1949215721566ce340d2b)](https://circleci.com/gh/UsabilityDynamics/node-object-settings)
-[![Dependency status](https://david-dm.org/UsabilityDynamics/node-object-settings.png)](https://david-dm.org/UsabilityDynamics/node-object-settings#info=dependencies&view=table)
-[![Dev Dependency Status](https://david-dm.org/UsabilityDynamics/nodenode-object-settings/dev-status.png)](https://david-dm.org/UsabilityDynamics/node-object-settings#info=devDependencies&view=table)
 
 
 Extends a custom JavaScript Object with "settings" methods.
