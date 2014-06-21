@@ -2,7 +2,7 @@
     "project": {
         "name": "object-settings",
         "description": "Object settings.",
-        "version": "0.1.2",
+        "version": "0.2.0",
         "url": "",
         "logo": "http://media.usabilitydynamics.com/logo.png"
     },

@@ -7,17 +7,100 @@
  */
 module.exports = function( grunt ) {
 
-  grunt.initConfig( {
+  // Automatically load tasks with package name "grunt-*" included in package.json.
+  require( 'load-grunt-tasks' )( grunt );
+  
+  grunt.initConfig({
 
     pkg: grunt.file.readJSON( 'package.json' ),
 
-    mochacli: {
+    jshint: {
       options: {
-        require: [ 'should' ],
-        reporter: 'list',
-        ui: 'exports'
+        jshintrc: '.jshintrc'
       },
-      all: [ 'test/*.js' ]
+      all: {
+        src: ['Gruntfile.js', 'lib/**/*.js']
+      }
+    },
+
+    clean: {
+      docs: {
+        src: 'docs/'
+      },
+      coverage: {
+        src: 'lib-cov/'
+      },
+      reports: {
+        src: 'reports/'
+      }
+    },
+
+    // Tests.
+    copy: {
+      test: {
+        src: ['test/**'],
+        dest: 'lib-cov/'
+      }
+    },
+
+    blanket: {
+      all: {
+        src: 'lib/',
+        dest: 'lib-cov/lib'
+      }
+    },
+
+    mochaTest: {
+        options: {
+            require: [ 'should' ],
+            reporter: 'list',
+            ui: 'exports'
+
+        },
+        
+      ci: {
+        options: {
+          reporter: 'spec',
+          timeout: 10000,
+          ui: 'exports',
+          require: [ 'should' ]
+        },
+        src: 'static/tests/*.js'
+      },
+      
+      'html-cov': {
+        options: {
+          reporter: 'html-cov',
+          quiet: true,
+          captureFile: 'static/reports/coverage.html'
+        },
+        src: ['static/lib-cov/test/lib/**/*.js']
+      },
+      
+      'mocha-lcov-reporter': {
+        options: {
+          reporter: 'mocha-lcov-reporter',
+          quiet: true,
+          captureFile: 'static/reports/lcov.info'
+        },
+        src: ['static/lib-cov/test/lib/**/*.js']
+      },
+      
+      'travis-cov': {
+        options: {
+          reporter: 'travis-cov'
+        },
+        src: ['static/lib-cov/test/lib/**/*.js']
+      }
+    },
+
+    coveralls: {
+      options: {
+        force: true
+      },
+      all: {
+        src: 'reports/lcov.info'
+      }
     },
 
     yuidoc: {
@@ -34,13 +117,6 @@ module.exports = function( grunt ) {
       }
     },
 
-    jscoverage: {
-      options: {
-        inputDirectory: 'lib',
-        outputDirectory: './static/lib-cov',
-        highlight: true
-      }
-    },
 
     watch: {
       options: {
@@ -77,8 +153,6 @@ module.exports = function( grunt ) {
       }
     },
 
-    clean: [],
-
     shell: {
       install: {},
       update: {}
@@ -86,19 +160,8 @@ module.exports = function( grunt ) {
 
   });
 
-  // Load tasks
-  grunt.loadNpmTasks( 'grunt-markdown' );
-  grunt.loadNpmTasks( 'grunt-mocha-cli' );
-  grunt.loadNpmTasks( 'grunt-jscoverage' );
-  grunt.loadNpmTasks( 'grunt-contrib-symlink' );
-  grunt.loadNpmTasks( 'grunt-contrib-yuidoc' );
-  grunt.loadNpmTasks( 'grunt-contrib-watch' );
-  grunt.loadNpmTasks( 'grunt-contrib-less' );
-  grunt.loadNpmTasks( 'grunt-contrib-clean' );
-  grunt.loadNpmTasks( 'grunt-shell' );
-
   // Build Assets
-  grunt.registerTask( 'default', [ 'markdown', 'yuidoc', 'jscoverage', 'mochacli' ] );
+  grunt.registerTask( 'default', [ 'mochaTest', 'markdown', 'yuidoc' ] );
 
   // Install environment
   grunt.registerTask( 'install', [ 'shell:pull', 'shell:install', 'yuidoc'  ] );
@@ -113,7 +176,7 @@ module.exports = function( grunt ) {
   grunt.registerTask( 'doc', [ 'yuidoc', 'markdown' ] );
 
   // Run Tests
-  grunt.registerTask( 'test', [ 'mochacli' ] );
+  grunt.registerTask( 'test', [ 'mochaTest:ci' ] );
 
   // Developer Mode
   grunt.registerTask( 'dev', [ 'watch' ] );

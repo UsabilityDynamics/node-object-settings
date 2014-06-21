@@ -1,8 +1,8 @@
 {
   "name": "object-settings",
   "description": "Object settings.",
-  "version": "0.1.2",
-  "main": "index",
+  "version": "0.2.0",
+  "main": "lib/object-settings",
   "author": {
     "name": "Usability Dynamics",
     "email": "info@usabilitydynamics.com",
@@ -22,8 +22,16 @@
   ],
   "keywords": [
     "object",
-    "emitter"
+    "settings"
   ],
+  "scripts": {
+    "test": "grunt test"
+  },
+  "config": {
+    "travis-cov": {
+      "threshold": 100
+    }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/UsabilityDynamics/node-object-settings.git"
@@ -34,7 +42,8 @@
   "dependencies": {
     "abstract": "~0.1.2",
     "lodash": "~2.4.1",
-    "debug": "~0.7.4"
+    "debug": "~0.7.4",
+    "eventemitter2": "~0.4.13"
   },
   "devDependencies": {
     "grunt-contrib-symlink": "~0.2.0",
@@ -47,8 +56,15 @@
     "grunt-markdown": "~0.4.0",
     "grunt-mocha-cli": "~1.3.0",
     "grunt-shell": "~0.5.0",
-    "Faker": "*",
-    "should": "*"
+    "faker": "~1.0.0",
+    "should": "~4.0.4",
+    "travis-cov": "~0.2.5",
+    "grunt-env": "~0.4.1",
+    "cover-child-process": "~0.1.5",
+    "load-grunt-tasks": "~0.6.0",
+    "grunt-mocha-test": "~0.11.0",
+    "grunt-notify": "~0.3.0",
+    "grunt-coveralls": "~0.3.0"
   },
   "readmeFilename": "readme.md"
 }
