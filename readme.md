@@ -1,4 +1,9 @@
-# Object Settings
+[![Build Status](https://circleci.com/gh/UsabilityDynamics/node-object-settings?circle-token=d1cea6b8ce1ab5a424f1949215721566ce340d2b)](https://waffle.io/usabilitydynamics/node-wordpress-client)
+
+[![Dependency status](https://david-dm.org/UsabilityDynamics/node-object-settings.png)](https://david-dm.org/UsabilityDynamics/node-object-settings#info=dependencies&view=table)
+
+[![Dev Dependency Status](https://david-dm.org/UsabilityDynamics/nodenode-object-settings/dev-status.png)](https://david-dm.org/UsabilityDynamics/node-object-settings#info=devDependencies&view=table)
+
 Extends a custom JavaScript Object with "settings" methods.
 This is similar to the "Configurable" module but provides several additional functions, most notably usage of Events.
 
@@ -70,19 +75,19 @@ Add Settings methods to a basic Object.
 ## Constructor Methods
 Constructor methods are only available on the non-initialized Object Settings module.
 
-  .debug()
-  .use()
-  .mixin()
-  .extend()
+* .debug()
+* .use()
+* .mixin()
+* .extend()
 
 ## Object Settings' Methods
 The below methods are available once an Object Settigns instance is created.
 
-  .get( name )
-  .set( name, val )
-  .set( obj )
-  .enable( name )
-  .disable( name )
+* .get( name )
+* .set( name, val )
+* .set( obj )
+* .enable( name )
+* .disable( name )
 
 ## Event Usage
 If your object is EventEmitter-capable the Object Settings will emit events when settings are changed.
