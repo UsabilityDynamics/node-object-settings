@@ -16,7 +16,7 @@ Object.defineProperties( MyObject, {
     "value": {}
   },
   "settings": {
-    "value": require( 'object-settings' ).create()
+    "value": require( '../' ).create()
   }
 });
 

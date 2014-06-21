@@ -8,10 +8,10 @@
  */
 
 // Get module
-var ObjectSettings = require( 'object-settings' );
+var ObjectSettings = require( '../' );
 
 // Create target object
-MyObject = {
+var MyObject = {
   my_data: {},
   my_method: function() {}
 };
