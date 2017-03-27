@@ -12,7 +12,7 @@ Add Settings methods to a basic Object.
   var ObjectSettings = require( 'object-settings' );
 
   // Create target object
-  MyObject = {
+  var MyObject = {
    my_data: {},
    my_method: function() {}
   };
